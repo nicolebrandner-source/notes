@@ -99,6 +99,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
-    @endauth
 </nav>
