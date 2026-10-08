@@ -19,11 +19,11 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-          'headline' => fake()->sentence(),
-          'subheadline' => fake()->sentence(),
-          'body' => fake()->paragraph(),  
-          'is_published' => fake()->boolean(),
-          'user_id' => User::factory(),       
-           ];
+            'headline' => fake()->sentence(),
+            'subheadline' => fake()->sentence(),
+            'body' => fake()->paragraph(),
+            'is_published' => fake()->boolean(),
+            'user_id' => User::factory(),
+        ];
     }
 }

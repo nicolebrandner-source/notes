@@ -20,9 +20,9 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-        'body' => fake()->sentence(),
-        'post_id' => Post::factory(),
-        'user_id' => User::factory(),
+            'body' => fake()->sentence(),
+            'post_id' => Post::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }
