@@ -53,7 +53,9 @@ return redirect()->route('admin.posts.index');
      */
     public function show(Post $post)
     {
-        //
+        abort_if($post->user_id !== auth()->id(), 403);
+
+return view('admin.posts.show', ['post' => $post]);
     }
 
     /**
