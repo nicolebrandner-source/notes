@@ -93,6 +93,11 @@ $post->save();
      */
     public function destroy(Post $post)
     {
-        //
+        abort_if($post->user_id !== auth()->id(), 403);
+
+$post->comments()->delete();
+$post->delete();
+
+return redirect()->route('admin.posts.index');
     }
 }
