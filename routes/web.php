@@ -5,6 +5,7 @@ use App\Http\Controllers\Userzone\ProfileController;
       use App\Http\Controllers\CommentController;
          use App\Http\Controllers\Admin\PostController as AdminPostController;
          use App\Http\Controllers\PageController;
+         use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'welcome'])->name('welcome');
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
        Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
           Route::resource('admin/posts', AdminPostController::class)->names('admin.posts');
+          Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+Route::post('/posts/{post}/favorite', [FavoriteController::class, 'store'])->name('favorites.store');
+Route::delete('/posts/{post}/favorite', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 });
 
 require __DIR__.'/auth.php';

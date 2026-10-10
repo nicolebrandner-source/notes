@@ -3,6 +3,20 @@
        <h2>{{ $post->subheadline }}</h2>
           <p>by {{ $post->user->name }}</p>
          <p>{{ $post->body }}</p>
+         @auth
+    @if (auth()->user()->favorites->contains($post))
+        <form method="POST" action="{{ route('favorites.destroy', $post) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="border rounded px-4 py-1">♥ Remove from favourites</button>
+        </form>
+    @else
+        <form method="POST" action="{{ route('favorites.store', $post) }}">
+            @csrf
+            <button type="submit" class="border rounded px-4 py-1">♡ Add to favourites</button>
+        </form>
+    @endif
+@endauth
             <h3>Comments</h3>
                @foreach ($post->comments as $comment)
                   <p>{{ $comment->user->name }}: {{ $comment->body }}</p>
