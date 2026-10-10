@@ -15,6 +15,14 @@
                     <x-breeze.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-breeze.nav-link>
+                    <x-breeze.nav-link :href="route('posts.index')" :active="request()->routeIs('posts.*')">
+    All posts
+</x-breeze.nav-link>
+@auth
+    <x-breeze.nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+        My posts
+    </x-breeze.nav-link>
+@endauth
                 </div>
             </div>
 
@@ -72,6 +80,14 @@
             <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.*')">
+    All posts
+</x-breeze.responsive-nav-link>
+@auth
+    <x-breeze.responsive-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+        My posts
+    </x-breeze.responsive-nav-link>
+@endauth
         </div>
 
         <!-- Responsive Settings Options -->
