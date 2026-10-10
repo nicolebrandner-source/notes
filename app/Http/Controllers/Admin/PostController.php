@@ -63,7 +63,8 @@ return view('admin.posts.show', ['post' => $post]);
      */
     public function edit(Post $post)
     {
-        //
+    abort_if($post->user_id !== auth()->id(), 403);
+    return view('admin.posts.edit', ['post' => $post]);
     }
 
     /**
@@ -71,7 +72,20 @@ return view('admin.posts.show', ['post' => $post]);
      */
     public function update(Request $request, Post $post)
     {
-        //
+        abort_if($post->user_id !== auth()->id(), 403);
+            $validated = $request->validate([
+    'headline' => 'required|max:200',
+    'subheadline' => 'required|max:200',
+    'body' => 'required|max:1000',
+]);
+
+$post->body = $validated['body'];
+$post->headline = $validated['headline'];
+$post->subheadline = $validated['subheadline'];
+$post->is_published = $request->boolean('is_published');
+$post->save();
+
+    return redirect()->route('admin.posts.show', $post);
     }
 
     /**

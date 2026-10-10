@@ -11,4 +11,5 @@
     <p>{{ $post->body }}</p>
 
     <a href="{{ route('admin.posts.index') }}">Back to my posts</a>
+    <a href="{{ route('admin.posts.edit', $post) }}">Edit</a>
 </x-app-layout>
