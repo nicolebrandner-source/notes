@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+           return view('admin.posts.create');
     }
 
     /**
@@ -31,7 +31,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $validated = $request->validate([
+    'headline' => 'required|max:200',
+    'subheadline' => 'required|max:200',
+    'body' => 'required|max:1000',
+]);
+
+$post = new Post();
+$post->body = $validated['body'];
+$post->headline = $validated['headline'];
+$post->subheadline = $validated['subheadline'];
+$post->is_published = $request->boolean('is_published');
+$post->user_id = auth()->id();
+$post->save();
+
+return redirect()->route('admin.posts.index');
     }
 
     /**
