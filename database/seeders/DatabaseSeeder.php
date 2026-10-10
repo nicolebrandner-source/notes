@@ -28,6 +28,9 @@ class DatabaseSeeder extends Seeder
         ]);
         Comment::factory(30)->recycle(Post::all())->create();
         Post::factory(3)->for($admin)->create();
+           $admin->favorites()->attach(
+       Post::where('is_published', true)->inRandomOrder()->take(3)->pluck('id')
+   );
 
     }
 }
