@@ -22,6 +22,9 @@
     <x-breeze.nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
         My posts
     </x-breeze.nav-link>
+        <x-breeze.nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')">
+        My favourites
+    </x-breeze.nav-link>
 @endauth
                 </div>
             </div>
@@ -86,6 +89,9 @@
 @auth
     <x-breeze.responsive-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
         My posts
+    </x-breeze.responsive-nav-link>
+        <x-breeze.responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')">
+        My favourites
     </x-breeze.responsive-nav-link>
 @endauth
         </div>
