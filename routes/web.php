@@ -3,6 +3,7 @@
 use App\Http\Controllers\Userzone\ProfileController;
    use App\Http\Controllers\PostController;
       use App\Http\Controllers\CommentController;
+         use App\Http\Controllers\Admin\PostController as AdminPostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
        Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+          Route::resource('admin/posts', AdminPostController::class)->names('admin.posts');
 });
 
 require __DIR__.'/auth.php';

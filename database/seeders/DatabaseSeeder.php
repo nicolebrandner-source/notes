@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
 
@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         Post::factory(10)->create([
         ]);
         Comment::factory(30)->recycle(Post::all())->create();
+        Post::factory(3)->for($admin)->create();
 
     }
 }
