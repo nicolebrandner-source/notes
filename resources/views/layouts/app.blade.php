@@ -36,6 +36,9 @@
     <main>
         {{ $slot }}
     </main>
+    <footer>
+        © 2026 Inkwell
+</footer>
 </div>
 </body>
 </html>
