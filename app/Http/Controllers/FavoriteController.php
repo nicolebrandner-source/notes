@@ -1,30 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Post;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class FavoriteController extends Controller
 {
-       public function index()
-   {
-    $posts = auth()->user()->favorites;
+    public function index()
+    {
+        $posts = auth()->user()->favorites;
 
-return view('favorites.index', ['posts' => $posts]);
-   }
+        return view('favorites.index', ['posts' => $posts]);
+    }
 
-   public function store(Post $post)
-{
-    auth()->user()->favorites()->syncWithoutDetaching($post->id);
+    public function store(Post $post)
+    {
+        auth()->user()->favorites()->syncWithoutDetaching($post->id);
 
-    return back();
-}
+        return back();
+    }
 
-public function destroy(Post $post)
-{
-    auth()->user()->favorites()->detach($post->id);
+    public function destroy(Post $post)
+    {
+        auth()->user()->favorites()->detach($post->id);
 
-    return back();
-}
+        return back();
+    }
 }

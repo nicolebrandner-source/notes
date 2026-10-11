@@ -13,9 +13,9 @@ class PostController extends Controller
      */
     public function index()
     {
-           $posts = auth()->user()->posts;
+        $posts = auth()->user()->posts;
 
-   return view('admin.posts.index', ['posts' => $posts]);
+        return view('admin.posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-           return view('admin.posts.create');
+        return view('admin.posts.create');
     }
 
     /**
@@ -31,21 +31,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-    $validated = $request->validate([
-    'headline' => 'required|max:200',
-    'subheadline' => 'required|max:200',
-    'body' => 'required|max:1000',
-]);
+        $validated = $request->validate([
+            'headline' => 'required|max:200',
+            'subheadline' => 'required|max:200',
+            'body' => 'required|max:1000',
+        ]);
 
-$post = new Post();
-$post->body = $validated['body'];
-$post->headline = $validated['headline'];
-$post->subheadline = $validated['subheadline'];
-$post->is_published = $request->boolean('is_published');
-$post->user_id = auth()->id();
-$post->save();
+        $post = new Post;
+        $post->body = $validated['body'];
+        $post->headline = $validated['headline'];
+        $post->subheadline = $validated['subheadline'];
+        $post->is_published = $request->boolean('is_published');
+        $post->user_id = auth()->id();
+        $post->save();
 
-return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -55,7 +55,7 @@ return redirect()->route('admin.posts.index');
     {
         abort_if($post->user_id !== auth()->id(), 403);
 
-return view('admin.posts.show', ['post' => $post]);
+        return view('admin.posts.show', ['post' => $post]);
     }
 
     /**
@@ -63,8 +63,9 @@ return view('admin.posts.show', ['post' => $post]);
      */
     public function edit(Post $post)
     {
-    abort_if($post->user_id !== auth()->id(), 403);
-    return view('admin.posts.edit', ['post' => $post]);
+        abort_if($post->user_id !== auth()->id(), 403);
+
+        return view('admin.posts.edit', ['post' => $post]);
     }
 
     /**
@@ -73,19 +74,19 @@ return view('admin.posts.show', ['post' => $post]);
     public function update(Request $request, Post $post)
     {
         abort_if($post->user_id !== auth()->id(), 403);
-            $validated = $request->validate([
-    'headline' => 'required|max:200',
-    'subheadline' => 'required|max:200',
-    'body' => 'required|max:1000',
-]);
+        $validated = $request->validate([
+            'headline' => 'required|max:200',
+            'subheadline' => 'required|max:200',
+            'body' => 'required|max:1000',
+        ]);
 
-$post->body = $validated['body'];
-$post->headline = $validated['headline'];
-$post->subheadline = $validated['subheadline'];
-$post->is_published = $request->boolean('is_published');
-$post->save();
+        $post->body = $validated['body'];
+        $post->headline = $validated['headline'];
+        $post->subheadline = $validated['subheadline'];
+        $post->is_published = $request->boolean('is_published');
+        $post->save();
 
-    return redirect()->route('admin.posts.show', $post);
+        return redirect()->route('admin.posts.show', $post);
     }
 
     /**
@@ -95,9 +96,9 @@ $post->save();
     {
         abort_if($post->user_id !== auth()->id(), 403);
 
-$post->comments()->delete();
-$post->delete();
+        $post->comments()->delete();
+        $post->delete();
 
-return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index');
     }
 }
