@@ -19,6 +19,10 @@
 <div class="min-h-screen bg-gray-100">
     @include('layouts.app_navigation')
 
+    <header>
+        Welcome to Inkwell!
+</header>
+
     <!-- Page Heading -->
     @isset($header)
         <header class="bg-white shadow">
